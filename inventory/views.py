@@ -67,7 +67,50 @@ def adduser(request):
         return redirect('App_inventory:adduser')
     else:
         return render(request,'inventory/users/addusers.html')
-    
+
+#add user page
+@login_required(login_url='App_Auth:login')
+@admin_required    
+def edituserdata(request,id):
+    try:
+        user=User.objects.get(id=id)
+        if request.method=="POST":
+            print("posting")
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            email = request.POST.get('email')
+            status = request.POST.get('status')
+            user_type = request.POST.get('user_type')
+
+            user.first_name=first_name
+            user.last_name=last_name
+            user.email=email
+            if status==1:
+                user.is_active=True
+            else:
+                user.is_active=False    
+            if user_type==1:
+                user.is_staff=True
+                user.is_superuser=True
+            else:
+                user.is_staff=False
+                user.is_superuser=False
+            user.save()
+            user=User.objects.get(id=id)
+            messages.success("user update successfully")
+            return redirect('App_inventory:userslist')   
+
+    except:
+        user=None
+
+    context={
+        'user':user
+    }
+    print(user)
+    return render(request,'inventory/users/edit.html',context)    
+
+
+
 def deleteuserdata(request):
     # try:
     if request.method=="POST":

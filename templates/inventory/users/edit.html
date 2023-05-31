@@ -1,0 +1,86 @@
+{% extends 'inventory/base/base.html'%}
+{% load static %}
+{% block main %}
+
+<div class="container-fluid add-form-list">
+    <div class="row">
+        <div class="col-sm-6 mx-auto">
+            {% include 'alert/alert.html'%}
+            {% if user %}
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Edit Users</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'App_inventory:edituser' user.id %}" id="edituserform" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="firstname">First Name *</label>
+                                    <input type="text" class="form-control" value="{{user.first_name}}"
+                                        name="first_name" id="firstname" placeholder="Enter Name">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lastname">Last Name *</label>
+                                    <input type="text" class="form-control" value="{{user.last_name}}" name="last_name"
+                                        id="lastname" placeholder="Enter Name">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="text" id="email" name="email" class="form-control"
+                                        value="{{user.email}}" placeholder="Enter Email">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="status">Status *</label>
+                                    <select name="type" id="status" name="status" class="form-control"
+                                        data-style="py-0">
+
+                                        <option value="1" {% if user.is_active %} selected {% endif %}>Active</option>
+                                        <option value="0" {% if not user.is_active %} selected {% endif %}>Inactive
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="usertype">User Type*</label>
+                                    <select name="type" id="usertype" name="usertype" class="form-control"
+                                        data-style="py-0">
+                                        <option value="-1">Select</option>
+                                        <option {% if user.is_superuser %} selected {% endif %} value="1">Admin</option>
+                                        <option {% if not user.is_superuser %} selected {% endif %} value="2">
+                                            Salesperson</option>
+                                    </select>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Update User</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div>
+                <h4 class="text-center">No Data Found</h4>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Page end  -->
+</div>
+
+{% endblock %}
