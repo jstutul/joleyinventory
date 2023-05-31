@@ -1,0 +1,93 @@
+{% extends 'inventory/base/base.html'%}
+{% load static %}
+{% block main %}
+
+<div class="container-fluid add-form-list">
+    <div class="row">
+        <div class="col-sm-6 mx-auto">
+            {% include 'alert/alert.html'%}
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Add Users</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="" id="adduserform" method="post">{% csrf_token %}
+                        <div class="row"> 
+                            <div class="col-md-6">                      
+                                <div class="form-group">
+                                    <label for="firstname">First Name *</label>
+                                    <input type="text" class="form-control" name="first_name" id="firstname" placeholder="Enter Name">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>    
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lastname">Last Name *</label>
+                                    <input type="text" class="form-control" name="last_name" id="lastname" placeholder="Enter Name">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div> 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="text" id="email" name="email" class="form-control" placeholder="Enter Email">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">                      
+                                <div class="form-group">
+                                    <label for="username">UserName *</label>
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter User Name">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">                      
+                                <div class="form-group">
+                                    <label for="password1">Password</label>
+                                    <input type="password" id="password1" name="password" class="form-control" placeholder="Enter Password">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>  
+                            <div class="col-md-6">                      
+                                <div class="form-group">
+                                    <label for="password2">Confirm Password</label>
+                                    <input type="password" id="password2" name="confirm_password" class="form-control" placeholder="Enter Confirm Password">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div> 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="status">Status *</label>
+                                    <select name="type" id="status" name="status" class="form-control" data-style="py-0">
+                                        <option value="-1">Select</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="usertype">User Type*</label>
+                                    <select name="type" id="usertype" name="usertype" class="form-control" data-style="py-0">
+                                        <option value="-1">Select</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2" >Salesperson</option>
+                                    </select>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>                             
+                        </div>                            
+                        <button type="submit" class="btn btn-primary mr-2">Add User</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page end  -->
+</div>
+
+{% endblock %}
